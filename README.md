@@ -1,6 +1,6 @@
-##### A collection of opinionated single-purpose Vagrant boxes.
+### A collection of opinionated single-purpose Vagrant boxes.
 
-##### Setup
+#### Setup
 
 1. Make sure you have (VirtualBox)[https://www.virtualbox.org] installed.
 2. `cd` into one of the directories
@@ -8,7 +8,13 @@
 
 Easy-peasy, wot?
 
-##### Notes
+#### Configuration
+
+Each app exposes its configuration as an ERB template inside the `conf` directory. This template is rendered and copied over the guest's configuration when the machine is provisioned.
+
+The configuration is re-rendered each time the `vagrant` command is run but *not* copied again. You must copy it over again within the guest. Check out the bootstrap script for details.
+
+#### Notes
 
 Each box will bind its default app port onto the host machine's localhost interface, i.e. `localhost:3306` for MySQL. However you should prefer using the VM's interface directly since the forwarding interface is quite slow, by almost 10x.
 
@@ -27,9 +33,3 @@ Once a box disk has expanded its size, it will never automatically shrink again.
 11. `cd` to the directory for the VM in particular (*not* the Vagrantfile directory), usually within `~/VirtualBox VMs`.
 12. Run `vboxmanage modifyhd --compact <disk_name>` where `disk_name` is the name of the virtual hard disk, e.g. `box-disk1.vmdk`. This will also take several minutes.
 13. Done! Continue using the box as usual.
-
-##### Configuration
-
-Each app exposes its configuration as an ERB template inside the `conf` directory. This template is rendered and copied over the guest's configuration when the machine is provisioned.
-
-The configuration is re-rendered each time the `vagrant` command is run but *not* copied again. You must copy it over again within the guest. Check out the bootstrap script for details.

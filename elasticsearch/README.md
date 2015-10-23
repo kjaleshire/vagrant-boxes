@@ -1,4 +1,4 @@
-##### Elasticsearch Notes
+#### Elasticsearch Notes
 
 This box is special in that it sets up several VMs in tandem which form an Elasticsearch cluster. You can edit the Vagrantfile to only spin up one, or maybe 3 or 5 boxes however you like.
 

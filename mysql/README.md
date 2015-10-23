@@ -1,4 +1,4 @@
-##### MySQL Notes
+#### MySQL Notes
 
 There is no password on the root user.
 
