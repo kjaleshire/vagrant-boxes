@@ -1,0 +1,28 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require 'erb'
+
+Vagrant.configure(2) do |config|
+  config.vm.box = 'ubuntu/vivid64'
+  config.vm.hostname = 'mysql-service'
+
+  config.vm.network :forwarded_port, guest: 3306, host: 3306
+  config.vm.network :private_network, ip: '10.0.33.6'
+
+  config.vm.synced_folder ".", "/vagrant", type: :nfs
+
+  directory = File.dirname(__FILE__)
+
+  @bind_address = "0.0.0.0"
+  mysqld_cnf_template = ERB.new(File.read("#{directory}/conf/mysqld.cnf.erb", mode: 'r'))
+  File.write("#{directory}/conf/mysqld.cnf", mysqld_cnf_template.result(binding), mode: 'w')
+
+  config.vm.provider 'virtualbox' do |vbox|
+    vbox.name = 'mysql-service'
+    vbox.cpus = 2
+    vbox.memory = 2048
+  end
+
+  config.vm.provision :shell, path: 'vagrant_bootstrap.sh', keep_color: true, privileged: false
+end

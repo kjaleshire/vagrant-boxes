@@ -1,0 +1,48 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require 'erb'
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/vivid64"
+
+  config.vm.synced_folder ".", "/vagrant", type: :nfs
+
+  config.vm.provider 'virtualbox' do |vbox|
+    vbox.memory = 2048
+  end
+
+  directory = File.dirname(__FILE__)
+
+  es_yml_template = ERB.new(File.read("#{directory}/conf/elasticsearch.yml.erb", mode: 'r'))
+  @cluster_name = 'vagrant'
+  @http_bind_address = '0.0.0.0'
+
+  provisioning_script = ERB.new(File.read("#{directory}/vagrant_bootstrap.sh.erb", mode: 'r'))
+
+  (1..2).each do |index|
+    is_primary = index == 1
+    config.vm.define :"es#{index}", primary: is_primary do |es|
+      es.vm.provider 'virtualbox' do |vbox|
+        vbox.name = "elasticsearch#{index}-service"
+      end
+
+      @network_host_address = "10.0.93.#{(10 + index).to_s}"
+      @identifier = "es#{index}"
+
+      File.write("#{directory}/conf/elasticsearch-#{@identifier}.yml", es_yml_template.result(binding), mode: 'w')
+
+      if is_primary
+        es.vm.network :forwarded_port, guest: 9200, host: 9200
+      end
+
+      es.vm.hostname = "elasticsearch#{index}-service"
+      es.vm.network 'private_network', ip: @network_host_address, auto_config: true
+
+      vagrant_bootstrap = provisioning_script.result(binding)
+
+      es.vm.provision :shell, inline: vagrant_bootstrap, keep_color: true, privileged: false
+    end
+  end
+
+end
