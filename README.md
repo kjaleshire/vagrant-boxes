@@ -2,7 +2,7 @@
 
 #### Setup
 
-1. Make sure you have (VirtualBox)[https://www.virtualbox.org] installed.
+1. Make sure you have [VirtualBox](https://www.virtualbox.org) installed.
 2. `cd` into one of the directories
 3. Run `vagrant up`
 
