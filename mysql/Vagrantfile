@@ -4,7 +4,7 @@
 require 'erb'
 
 Vagrant.configure(2) do |config|
-  config.vm.box = 'ubuntu/vivid64'
+  config.vm.box = 'ubuntu/wily64'
   config.vm.hostname = 'mysql-service'
 
   config.vm.network :forwarded_port, guest: 3306, host: 3306

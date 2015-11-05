@@ -1,0 +1,29 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require "erb"
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/wily64"
+  # config.vm.hostname = "rabbitmq-broker"
+
+  config.vm.network :forwarded_port, guest: 5672, host: 5672
+  config.vm.network :forwarded_port, guest: 15672, host: 15672
+  config.vm.network :forwarded_port, guest: 25672, host: 25672
+  config.vm.network :private_network, ip: "10.0.56.72"
+
+  config.vm.synced_folder ".", "/vagrant", type: :nfs
+
+  directory = File.dirname(__FILE__)
+
+  @bind_ip = "0.0.0.0"
+  rabbitmq_conf = ERB.new(File.read("#{directory}/conf/rabbitmq-env.conf.erb", mode: "r"))
+  File.write("#{directory}/conf/rabbitmq-env.conf", rabbitmq_conf.result(binding), mode: "w")
+
+  config.vm.provider "virtualbox" do |vbox|
+    vbox.name = "rabbitmq-broker"
+    vbox.memory = 512
+  end
+
+  config.vm.provision :shell, path: "vagrant_bootstrap.sh", keep_color: true, privileged: false
+end
