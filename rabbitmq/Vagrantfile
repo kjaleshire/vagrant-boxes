@@ -5,7 +5,6 @@ require "erb"
 
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/wily64"
-  # config.vm.hostname = "rabbitmq-broker"
 
   config.vm.network :forwarded_port, guest: 5672, host: 5672
   config.vm.network :forwarded_port, guest: 15672, host: 15672
@@ -17,8 +16,11 @@ Vagrant.configure(2) do |config|
   directory = File.dirname(__FILE__)
 
   @bind_ip = "0.0.0.0"
-  rabbitmq_conf = ERB.new(File.read("#{directory}/conf/rabbitmq-env.conf.erb", mode: "r"))
-  File.write("#{directory}/conf/rabbitmq-env.conf", rabbitmq_conf.result(binding), mode: "w")
+  rabbitmq_env_conf = ERB.new(File.read("#{directory}/conf/rabbitmq-env.conf.erb", mode: "r"))
+  File.write("#{directory}/conf/rabbitmq-env.conf", rabbitmq_env_conf.result(binding), mode: "w")
+
+  rabbitmq_config = ERB.new(File.read("#{directory}/conf/rabbitmq.config.erb", mode: "r"))
+  File.write("#{directory}/conf/rabbitmq.config", rabbitmq_config.result(binding), mode: "w")
 
   config.vm.provider "virtualbox" do |vbox|
     vbox.name = "rabbitmq-broker"

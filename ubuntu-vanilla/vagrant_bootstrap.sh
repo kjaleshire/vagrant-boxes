@@ -19,18 +19,7 @@ echo updating package information
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
-install rabbitmq rabbitmq-server
-
-echo installing rabbitmq config
-sudo mv /etc/rabbitmq/rabbitmq-env.conf /etc/rabbitmq/rabbitmq-env.conf.bak
-sudo cp /vagrant/conf/rabbitmq-env.conf /etc/rabbitmq/rabbitmq-env.conf
-sudo cp /vagrant/conf/rabbitmq.config /etc/rabbitmq/rabbitmq.config
-sudo systemctl restart rabbitmq-server
-
-echo creating `vagrant` rabbitmq user
-sudo rabbitmqctl delete_user guest
-sudo rabbitmqctl add_user vagrant vagrant
-sudo rabbitmqctl set_user_tags vagrant administrator
+install utilities zerofree xorriso qemu nasm
 
 # cleanup
 echo cleaning up

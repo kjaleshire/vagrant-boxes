@@ -29,19 +29,7 @@ install elasticsearch elasticsearch openjdk-8-jre-headless
 
 # install config
 sudo mv /etc/elasticsearch/elasticsearch.yml /etc/elasticsearch/elasticsearch.yml.bak
-sudo cp /vagrant/conf/elasticsearch-<%= @identifier %>.yml /etc/elasticsearch/elasticsearch.yml
-
-# install templates
-sudo mkdir /etc/elasticsearch/templates
-sudo cp /vagrant/conf/index_template.json /etc/elasticsearch/templates/
-
-# install custom stems file
-sudo mkdir /etc/elasticsearch/analysis
-sudo cp /vagrant/conf/english_custom_stems.txt /etc/elasticsearch/analysis/
-
-# install status script
-sudo cp /vagrant/status.sh /home/vagrant/
-sudo chmod +x /home/vagrant/status.sh
+sudo cp /vagrant/conf/elasticsearch-service-<%= @identifier %>.yml /etc/elasticsearch/elasticsearch.yml
 
 # enable and start service
 sudo systemctl enable elasticsearch.service

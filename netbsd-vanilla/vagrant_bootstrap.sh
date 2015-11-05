@@ -4,8 +4,7 @@
 function install {
     echo installing $1
     shift
-    # Use noninteractive to avoid dialogs (eg mysql-server asking for password)
-    sudo DEBIAN_FRONTEND=noninteractive apt-get -y install "$@"
+    sudo pkgin -y install "$@"
 }
 
 # Make sure the system is using UTF-8
@@ -16,15 +15,14 @@ export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
 echo updating package information
-sudo apt-get -y update
-sudo apt-get -y upgrade
+sudo pkgin -y update
+sudo pkgin -y upgrade
 
-install postgres postgresql postgis
+install utilities nano openssl nasm git
 
-sudo mv /etc/postgresql/9.4/main/postgresql.conf /etc/postgresql/9.4/main/postgresql.conf.bak
-sudo cp /vagrant/conf/postgresql.conf /etc/postgresql/9.4/main/
-sudo systemctl restart postgresql
+install mozilla-rootcerts mozilla-rootcerts
+sudo mozilla-rootcerts install
 
 # cleanup
 echo cleaning up
-sudo apt-get clean
+sudo pkgin clean

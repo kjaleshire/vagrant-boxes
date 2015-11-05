@@ -5,7 +5,6 @@ require 'erb'
 
 Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/wily64"
-  config.vm.hostname = "cache-services"
 
   config.vm.network :forwarded_port, guest: 6379, host: 6379
   config.vm.network :forwarded_port, guest: 11211, host: 11211

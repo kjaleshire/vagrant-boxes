@@ -1,0 +1,19 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure(2) do |config|
+  config.vm.box = "ubuntu/wily64"
+
+  config.vm.network :private_network, ip: "10.0.10.60"
+
+  config.vm.synced_folder ".", "/vagrant", type: :nfs
+  config.vm.synced_folder "/Users/kja/dev/metal", "/metal", type: :nfs
+
+  config.vm.provider "virtualbox" do |vbox|
+    vbox.name = "ubuntu-vanilla"
+    vbox.memory = 1024
+    vbox.cpus = 1
+  end
+
+  config.vm.provision :shell, path: "vagrant_bootstrap.sh", keep_color: true, privileged: false
+end
