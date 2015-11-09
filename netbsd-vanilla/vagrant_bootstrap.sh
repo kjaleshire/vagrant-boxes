@@ -18,9 +18,7 @@ echo updating package information
 sudo pkgin -y update
 sudo pkgin -y upgrade
 
-install utilities nano openssl nasm git
-
-install mozilla-rootcerts mozilla-rootcerts
+install utilities nano openssl nasm git mozilla-rootcerts
 sudo mozilla-rootcerts install
 
 # cleanup

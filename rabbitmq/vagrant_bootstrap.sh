@@ -31,6 +31,10 @@ echo creating `vagrant` rabbitmq user
 sudo rabbitmqctl delete_user guest
 sudo rabbitmqctl add_user vagrant vagrant
 sudo rabbitmqctl set_user_tags vagrant administrator
+sudo rabbitmqctl set_permissions vagrant ".*" ".*" ".*"
+
+echo enabling rabbitmq management plugin
+sudo rabbitmq-plugins enable rabbitmq_management
 
 # cleanup
 echo cleaning up

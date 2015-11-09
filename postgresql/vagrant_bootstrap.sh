@@ -23,7 +23,15 @@ install postgres postgresql postgis
 
 sudo mv /etc/postgresql/9.4/main/postgresql.conf /etc/postgresql/9.4/main/postgresql.conf.bak
 sudo cp /vagrant/conf/postgresql.conf /etc/postgresql/9.4/main/
+
+sudo mv /etc/postgresql/9.4/main/pg_hba.conf /etc/postgresql/9.4/main/pg_hba.conf.bak
+sudo cp /vagrant/conf/pg_hba.conf /etc/postgresql/9.4/main/
+
 sudo systemctl restart postgresql
+
+echo creating default postgres role
+sudo -u postgres createuser --superuser vagrant
+sudo -u postgres createdb vagrant
 
 # cleanup
 echo cleaning up
