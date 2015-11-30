@@ -17,8 +17,11 @@ echo updating package information
 sudo pkgin -y update
 sudo pkgin -y upgrade
 
-install utilities bash nano openssl nasm git mozilla-rootcerts qemu
+install utilities bash nano openssl nasm git qemu mozilla-rootcerts
 sudo mozilla-rootcerts install
+
+echo installing necessary junk for rump kernels
+install stuff cdrkit cmake gtar gmake findutils coreutils libisoburn grub2
 
 # cleanup
 echo cleaning up

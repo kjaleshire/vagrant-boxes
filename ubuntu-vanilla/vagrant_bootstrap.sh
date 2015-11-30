@@ -21,6 +21,10 @@ sudo apt-get -y upgrade
 
 install utilities zerofree xorriso qemu nasm
 
+echo installing multirust
+curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh -s -- --yes
+multirust update
+
 # cleanup
 echo cleaning up
 sudo apt-get clean

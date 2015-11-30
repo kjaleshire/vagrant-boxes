@@ -1,5 +1,4 @@
 **/.vagrant
-elasticsearch/conf/english_custom_stems.txt
 **/*.conf
 **/*.yml
 **/*.cnf
