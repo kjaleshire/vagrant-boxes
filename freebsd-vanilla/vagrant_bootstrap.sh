@@ -1,12 +1,4 @@
 #!/usr/bin/env sh
-# Some parts borrowed from https://github.com/rails/rails-dev-box/
-# The output of all these installation steps is noisy. With this utility
-# the progress report is nice and concise.
-function install {
-    echo installing $1
-    shift
-    sudo pkg install -y "$@"
-}
 
 # Make sure the system is using UTF-8
 export LC_CTYPE="en_US.UTF-8"
@@ -19,9 +11,13 @@ sudo pkg update
 sudo pkg upgrade -y
 
 echo installing utilities
-install utilities bash curl nano git nasm openssl qemu
+pkg install -y utilities bash curl nano git nasm openssl qemu svn
 
 sudo chsh -s /usr/local/bin/bash vagrant
+
+echo installing multirust
+curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh -s -- --yes
+multirust update
 
 cleanup
 echo cleaning up

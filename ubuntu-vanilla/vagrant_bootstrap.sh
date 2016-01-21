@@ -19,7 +19,7 @@ echo updating package information
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
-install utilities zerofree xorriso qemu nasm
+install utilities zerofree xorriso qemu nasm texinfo flex bison python-dev ncurses-dev
 
 echo installing multirust
 curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh -s -- --yes
