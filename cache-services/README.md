@@ -1,3 +1,3 @@
-#### Redis + Memcached Notes
+#### Redis Notes
 
-This box runs a Redis service and Memcached service simultaneously. Nothing special, 'nuff said.
+This box runs a Redis service. Nothing special, 'nuff said.

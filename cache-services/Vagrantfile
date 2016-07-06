@@ -4,10 +4,10 @@
 require 'erb'
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "ubuntu/wily64"
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.hostname = "vagrant"
 
   config.vm.network :forwarded_port, guest: 6379, host: 6379
-  config.vm.network :forwarded_port, guest: 11211, host: 11211
   config.vm.network :private_network, ip: "10.0.63.79"
 
   config.vm.synced_folder ".", "/vagrant", type: :nfs
@@ -17,10 +17,6 @@ Vagrant.configure(2) do |config|
   @redis_bind_ip = "0.0.0.0"
   redis_conf = ERB.new(File.read("#{directory}/conf/redis.conf.erb", mode: 'r'))
   File.write("#{directory}/conf/redis.conf", redis_conf.result(binding), mode: 'w')
-
-  @memcached_bind_ip = "0.0.0.0"
-  memcached_conf = ERB.new(File.read("#{directory}/conf/memcached.conf.erb", mode: 'r'))
-  File.write("#{directory}/conf/memcached.conf", memcached_conf.result(binding), mode: 'w')
 
   config.vm.provider "virtualbox" do |vbox|
     vbox.name = 'cache-services'

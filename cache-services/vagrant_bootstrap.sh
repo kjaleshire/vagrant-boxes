@@ -20,17 +20,12 @@ sudo apt-get -y update
 sudo apt-get -y upgrade
 
 #Install for Vivid
-echo installing and configuring Redis & Memcached
+echo installing and configuring Redis
 install redis redis-server
-install memcached memcached
 
 sudo mv /etc/redis/redis.conf /etc/redis/redis.conf.bak
 sudo cp /vagrant/conf/redis.conf /etc/redis/
 sudo systemctl restart redis-server
-
-sudo mv /etc/memcached.conf /etc/memcached.conf.bak
-sudo cp /vagrant/conf/memcached.conf /etc/
-sudo systemctl restart memcached
 
 # cleanup
 echo cleaning up
