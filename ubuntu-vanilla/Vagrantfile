@@ -2,12 +2,15 @@
 # vi: set ft=ruby :
 
 Vagrant.configure(2) do |config|
-  config.vm.box = "ubuntu/wily64"
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.hostname = "vagrant"
 
   config.vm.network :private_network, ip: "10.0.10.10"
 
   config.vm.synced_folder ".", "/vagrant", type: :nfs
   config.vm.synced_folder "/Users/kja/dev/metal", "/metal", type: :nfs
+  config.vm.synced_folder "/Users/kja/dev/smashthestack", "/smashthestack", type: :nfs
+  config.vm.synced_folder "/Users/kja/dev/rust/multiboot-kernel", "/rust-kernel", type: :nfs
 
   config.vm.provider "virtualbox" do |vbox|
     vbox.name = "ubuntu-vanilla"

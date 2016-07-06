@@ -19,7 +19,7 @@ echo ">>>> updating package information"
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
-install utilities zerofree xorriso qemu nasm texinfo flex bison git python-dev ncurses-dev
+install utilities zerofree xorriso qemu nasm texinfo flex bison git python-dev ncurses-dev make
 
 echo ">>>> installing rust toolchain"
 curl https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-setup -o rustup-setup -sSf
@@ -39,14 +39,6 @@ rustup target add armv7s-apple-ios
 rustup target add aarch64-apple-ios
 rustup target add x86_64-apple-ios
 rustup target add i386-apple-ios
-
-echo ">>>> installing swift toolchain"
-install "swift dependencies" clang-3.6 libicu-dev
-curl https://swift.org/builds/swift-2.2-release/ubuntu1510/swift-2.2-RELEASE/swift-2.2-RELEASE-ubuntu15.10.tar.gz -o swift-2.2-RELEASE-ubuntu15.10.tar.gz -sSf
-tar zxf swift-2.2-RELEASE-ubuntu15.10.tar.gz
-mv swift-2.2-RELEASE-ubuntu15.10/usr ./.swift
-rm -rf swift-2.2-RELEASE-ubuntu15.10.tar.gz swift-2.2-RELEASE-ubuntu15.10
-echo "PATH=\$PATH:\$HOME/.swift/bin" >> $HOME/.profile
 
 # cleanup
 echo ">>>> cleaning up"

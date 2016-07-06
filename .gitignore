@@ -2,3 +2,5 @@
 **/*.conf
 **/*.yml
 **/*.cnf
+services-up.sh
+*.log

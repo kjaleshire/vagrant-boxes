@@ -15,10 +15,6 @@ pkg install -y utilities bash curl nano git nasm openssl qemu svn
 
 sudo chsh -s /usr/local/bin/bash vagrant
 
-echo installing multirust
-curl -sf https://raw.githubusercontent.com/brson/multirust/master/blastoff.sh | sh -s -- --yes
-multirust update
-
 cleanup
 echo cleaning up
 sudo pkg clean
