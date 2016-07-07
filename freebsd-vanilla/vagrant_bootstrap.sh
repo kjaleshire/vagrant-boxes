@@ -11,10 +11,9 @@ sudo pkg update
 sudo pkg upgrade -y
 
 echo installing utilities
-pkg install -y utilities bash curl nano git nasm openssl qemu svn
+sudo pkg install -y bash curl nano git nasm openssl qemu subversion
 
 sudo chsh -s /usr/local/bin/bash vagrant
 
-cleanup
 echo cleaning up
 sudo pkg clean

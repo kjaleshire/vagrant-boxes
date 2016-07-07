@@ -21,6 +21,7 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |vbox|
     vbox.name = 'cache-services'
     vbox.memory = 512
+    vbox.vcpus = 1
   end
 
   config.vm.provision :shell, path: "vagrant_bootstrap.sh", keep_color: true, privileged: false

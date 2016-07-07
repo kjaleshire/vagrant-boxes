@@ -1,6 +1,6 @@
-**/.vagrant
-**/*.conf
-**/*.yml
-**/*.cnf
+.vagrant
+*.conf
+*.yml
+*.cnf
 services-up.sh
 *.log
