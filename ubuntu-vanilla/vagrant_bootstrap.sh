@@ -19,7 +19,8 @@ echo ">>>> updating package information"
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
-install utilities zerofree xorriso qemu nasm texinfo flex bison git python-dev ncurses-dev make
+install utilities zerofree xorriso qemu nasm git make gdb
+install "patched gdb stuff" texinfo flex bison python-dev ncurses-dev
 
 echo ">>>> installing rust toolchain"
 curl https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-setup -o rustup-setup -sSf
