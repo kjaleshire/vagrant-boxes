@@ -8,6 +8,16 @@ function install {
     sudo DEBIAN_FRONTEND=noninteractive apt-get -y install "$@"
 }
 
+# current xenial image (as of 8/09/16) is broken:
+# https://bugs.launchpad.net/ubuntu/+source/livecd-rootfs/+bug/1561250
+#
+# need the following bootstrap code to make sure the hostname
+# is in the hosts file:
+if ! grep -q $(cat /etc/hostname) /etc/hosts; then
+    sudo sh -c "echo >> /etc/hosts"
+    sudo sh -c "echo 127.0.0.1 $(cat /etc/hostname) >> /etc/hosts"
+fi
+
 # Make sure the system is using UTF-8
 locale-gen en_US.UTF-8
 export LC_CTYPE="en_US.UTF-8"

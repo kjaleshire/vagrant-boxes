@@ -19,7 +19,7 @@ Vagrant.configure(2) do |config|
   File.write("#{directory}/conf/redis.conf", redis_conf.result(binding), mode: 'w')
 
   config.vm.provider "virtualbox" do |vbox|
-    vbox.name = 'cache-services'
+    vbox.name = 'redis-service'
     vbox.cpus = 1
     vbox.memory = 512
   end
