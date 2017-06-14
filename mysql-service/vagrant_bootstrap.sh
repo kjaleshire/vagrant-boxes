@@ -26,6 +26,7 @@ export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
 echo updating package information
+sudo add-apt-repository 'deb http://archive.ubuntu.com/ubuntu trusty universe'
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
@@ -34,7 +35,7 @@ install utilities zerofree
 
 # Install mysql
 echo installing and configuring MySQL
-install mysql mysql-client mysql-server
+install mysql mysql-client-5.6 mysql-server-5.6
 
 sudo mv /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bak
 sudo cp /vagrant/conf/mysqld.cnf /etc/mysql/mysql.conf.d/
