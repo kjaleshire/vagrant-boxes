@@ -39,9 +39,10 @@ install mysql mysql-client-5.6 mysql-server-5.6
 
 sudo mv /etc/mysql/mysql.conf.d/mysqld.cnf /etc/mysql/mysql.conf.d/mysqld.cnf.bak
 sudo cp /vagrant/conf/mysqld.cnf /etc/mysql/mysql.conf.d/
-sudo service mysql restart
 
 sudo mysql -u root -e "GRANT ALL ON *.* to root@'10.%'"
+
+sudo service mysql restart
 
 # cleanup
 echo cleaning up
